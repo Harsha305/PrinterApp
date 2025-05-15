@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Print File</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Print a File</h2>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul>
+            {% for msg in messages %}
+              <li>{{ msg }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST" enctype="multipart/form-data">
+            <label for="printer">Select Printer:</label>
+            <select name="printer" id="printer">
+                {% for printer in printers %}
+                    <option value="{{ printer }}">{{ printer }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="file">Choose a file to print:</label>
+            <input type="file" name="file" id="file">
+
+            <input type="submit" value="Print">
+        </form>
+    </div>
+</body>
+</html>
